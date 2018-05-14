@@ -1,0 +1,9 @@
+hadoop fs -mkdir /user/cloudera 
+hadoop fs -mkdir /user/cloudera/average_inmapper 
+hadoop fs -mkdir /user/cloudera/average_inmapper/input
+hadoop fs -put access_log /user/cloudera/average_inmapper/input
+
+hadoop fs -rm -r /user/cloudera/average_inmapper/output
+hadoop jar average_inmapper.jar average_inmapper.Driver /user/cloudera/average_inmapper/input /user/cloudera/average_inmapper/output 
+
+hadoop fs -cat /user/cloudera/average_inmapper/output/*

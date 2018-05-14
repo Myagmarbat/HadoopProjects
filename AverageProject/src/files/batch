@@ -1,0 +1,9 @@
+hadoop fs -mkdir /user/cloudera 
+hadoop fs -mkdir /user/cloudera/average 
+hadoop fs -mkdir /user/cloudera/average/input
+hadoop fs -put access_log /user/cloudera/average/input
+
+hadoop fs -rm -r /user/cloudera/average/output
+hadoop jar average.jar average.Driver /user/cloudera/average/input /user/cloudera/average/output 
+
+hadoop fs -cat /user/cloudera/average/output/*

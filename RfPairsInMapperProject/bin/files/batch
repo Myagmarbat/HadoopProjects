@@ -1,0 +1,12 @@
+hadoop fs -mkdir /user/cloudera 
+hadoop fs -mkdir /user/cloudera/pairs_inmapper 
+hadoop fs -mkdir /user/cloudera/pairs_inmapper/input
+echo "B12 C31 D76 A12 B76 B12 D76 C31 A10 B12 D76" > file0
+echo "C31 D76 B12 A12 C31 D76 B12 A12 D76 A12 D76" > file1
+hadoop fs -put file* /user/cloudera/pairs_inmapper/input
+
+hadoop fs -rm -r /user/cloudera/pairs_inmapper/output
+hadoop jar pairs_inmapper.jar pairs_inmapper.Driver /user/cloudera/pairs_inmapper/input /user/cloudera/pairs_inmapper/output 
+
+hadoop fs -cat /user/cloudera/pairs_inmapper/output/*
+hadoop fs -cat /user/cloudera/pairs_inmapper/input/*

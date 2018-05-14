@@ -1,0 +1,11 @@
+hadoop fs -mkdir /user/cloudera 
+hadoop fs -mkdir /user/cloudera/hybrid_inmapper 
+hadoop fs -mkdir /user/cloudera/hybrid_inmapper/input
+echo "B12 C31 D76 A12 B76 B12 D76 C31 A10 B12 D76" > file0
+echo "C31 D76 B12 A12 C31 D76 B12 A12 D76 A12 D76" > file1
+hadoop fs -put file* /user/cloudera/hybrid_inmapper/input
+
+hadoop fs -rm -r /user/cloudera/hybrid_inmapper/output
+hadoop jar hybrid_inmapper.jar hybrid_inmapper.Driver /user/cloudera/hybrid_inmapper/input /user/cloudera/hybrid_inmapper/output
+
+hadoop fs -cat /user/cloudera/hybrid_inmapper/output/*
